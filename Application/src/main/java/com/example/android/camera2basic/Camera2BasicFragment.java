@@ -29,6 +29,7 @@ import android.content.res.Configuration;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -181,6 +182,14 @@ public class Camera2BasicFragment extends Fragment
      */
     private Size mPreviewSize;
 
+    protected float maxzoom ;
+
+    private CameraCharacteristics cameraCharacteristics ;
+
+    Rect m ;
+    Rect zoom ;
+
+
     /**
      * {@link CameraDevice.StateCallback} is called when {@link CameraDevice} changes its state.
      */
@@ -279,6 +288,8 @@ public class Camera2BasicFragment extends Fragment
      * Orientation of the camera sensor
      */
     private int mSensorOrientation;
+
+    private CameraCharacteristics characteristics;
 
     /**
      * A {@link CameraCaptureSession.CaptureCallback} that handles events related to JPEG capture.
@@ -493,12 +504,12 @@ public class Camera2BasicFragment extends Fragment
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
             for (String cameraId : manager.getCameraIdList()) {
-                CameraCharacteristics characteristics
-                        = manager.getCameraCharacteristics(cameraId);
+                characteristics = manager.getCameraCharacteristics(cameraId);
+
 
                 // We don't use a front facing camera in this sample.
                 Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
-                if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
+                if (facing != null && facing != CameraCharacteristics.LENS_FACING_FRONT) {
                     continue;
                 }
 
@@ -546,7 +557,20 @@ public class Camera2BasicFragment extends Fragment
                 int rotatedPreviewHeight = height;
                 int maxPreviewWidth = displaySize.x;
                 int maxPreviewHeight = displaySize.y;
+                // ZOOMING
+                m = characteristics.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE);
+                float maxzoom = (characteristics.get(CameraCharacteristics.SCALER_AVAILABLE_MAX_DIGITAL_ZOOM)) * 10;
 
+                Log.d("Max size", String.valueOf(maxzoom));
+                int minW = (int) (m.width() / maxzoom);
+                int minH = (int) (m.height() / maxzoom);
+                int difW = m.width() - minW;
+                int difH = m.height() - minH;
+                int cropW = difW /100 * (int) 38;
+                int cropH = difH /100 * (int) 38;
+                //cropW -= cropW & 3 ;
+                //cropH -= cropH & 3 ;
+                zoom = new Rect(cropW, cropH, m.width() - cropW, m.height()-cropH);
                 if (swappedDimensions) {
                     rotatedPreviewWidth = height;
                     rotatedPreviewHeight = width;
@@ -687,6 +711,7 @@ public class Camera2BasicFragment extends Fragment
             mPreviewRequestBuilder
                     = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
             mPreviewRequestBuilder.addTarget(surface);
+            mPreviewRequestBuilder.set(CaptureRequest.SCALER_CROP_REGION, zoom );
 
             // Here, we create a CameraCaptureSession for camera preview.
             mCameraDevice.createCaptureSession(Arrays.asList(surface, mImageReader.getSurface()),
