@@ -18,11 +18,13 @@ package com.example.android.camera2basic;
 
 import android.app.Activity;
 import android.os.Bundle;
+import com.google.android.gms.ads.MobileAds;
 
 public class CameraActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        private AdView mAdView;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         if (null == savedInstanceState) {
@@ -30,6 +32,11 @@ public class CameraActivity extends Activity {
                     .replace(R.id.container, Camera2BasicFragment.newInstance())
                     .commit();
         }
+        // Hello World
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        mAdView = findViewById(R.id.advert);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
 }
