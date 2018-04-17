@@ -18,25 +18,37 @@ package com.example.android.camera2basic;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 public class CameraActivity extends Activity {
-
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        private AdView mAdView;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
         if (null == savedInstanceState) {
+
             getFragmentManager().beginTransaction()
                     .replace(R.id.container, Camera2BasicFragment.newInstance())
                     .commit();
+
         }
+        Log.d("XXX", "a");
         // Hello World
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
-        mAdView = findViewById(R.id.advert);
-        AdRequest adRequest = new AdRequest.Builder().build();
+        Log.d("XXX", "b");
+        mAdView = (AdView) findViewById(R.id.advert);
+        Log.d("XXX", "c");
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        Log.d("XXX", "d");
         mAdView.loadAd(adRequest);
+        Log.d("XXX", "e");
     }
 
 }

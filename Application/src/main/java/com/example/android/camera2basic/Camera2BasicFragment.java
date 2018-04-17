@@ -138,6 +138,7 @@ public class Camera2BasicFragment extends Fragment
 
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
+            Log.d("Open", "About to open camera");
             openCamera(width, height);
         }
 
@@ -910,6 +911,7 @@ public class Camera2BasicFragment extends Fragment
 
     @Override
     public void onClick(View view) {
+
         switch (view.getId()) {
             /*
             case R.id.picture: {
@@ -917,6 +919,7 @@ public class Camera2BasicFragment extends Fragment
                 break;
             }
             */
+
             case R.id.close: {
                 Activity activity = getActivity();
                 if (null != activity) {
