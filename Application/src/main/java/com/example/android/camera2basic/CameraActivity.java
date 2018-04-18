@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -49,6 +50,13 @@ public class CameraActivity extends Activity {
         Log.d("XXX", "d");
         mAdView.loadAd(adRequest);
         Log.d("XXX", "e");
+        mAdView.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                Log.i("Ads","onAdLoaded");
+                mAdView.bringToFront();
+            }}
+
+        );
     }
 
 }
