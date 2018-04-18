@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.camera2basic;
+package com.futonchild.android.thesituation;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -31,12 +31,12 @@ public class CameraActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
+        setContentView(com.futonchild.android.thesituation.R.layout.activity_camera);
 
         if (null == savedInstanceState) {
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.container, Camera2BasicFragment.newInstance())
+                    .replace(com.futonchild.android.thesituation.R.id.container, Camera2BasicFragment.newInstance())
                     .commit();
 
         }
@@ -44,7 +44,7 @@ public class CameraActivity extends Activity {
         // Hello World
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
         Log.d("XXX", "b");
-        mAdView = (AdView) findViewById(R.id.advert);
+        mAdView = (AdView) findViewById(com.futonchild.android.thesituation.R.id.advert);
         Log.d("XXX", "c");
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         Log.d("XXX", "d");

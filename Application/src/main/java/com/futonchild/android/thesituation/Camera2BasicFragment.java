@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.camera2basic;
+package com.futonchild.android.thesituation;
 
 import android.Manifest;
 import android.app.Activity;
@@ -433,14 +433,14 @@ public class Camera2BasicFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
+        return inflater.inflate(com.futonchild.android.thesituation.R.layout.fragment_camera2_basic, container, false);
     }
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         //view.findViewById(R.id.picture).setOnClickListener(this);
-        view.findViewById(R.id.close).setOnClickListener(this);
-        mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
+        view.findViewById(com.futonchild.android.thesituation.R.id.close).setOnClickListener(this);
+        mTextureView = (AutoFitTextureView) view.findViewById(com.futonchild.android.thesituation.R.id.texture);
     }
 
     @Override
@@ -486,7 +486,7 @@ public class Camera2BasicFragment extends Fragment
                                            @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults.length != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                ErrorDialog.newInstance(getString(R.string.request_permission))
+                ErrorDialog.newInstance(getString(com.futonchild.android.thesituation.R.string.request_permission))
                         .show(getChildFragmentManager(), FRAGMENT_DIALOG);
             }
         } else {
@@ -616,7 +616,7 @@ public class Camera2BasicFragment extends Fragment
         } catch (NullPointerException e) {
             // Currently an NPE is thrown when the Camera2API is used but not supported on the
             // device this code runs.
-            ErrorDialog.newInstance(getString(R.string.camera_error))
+            ErrorDialog.newInstance(getString(com.futonchild.android.thesituation.R.string.camera_error))
                     .show(getChildFragmentManager(), FRAGMENT_DIALOG);
         }
     }
@@ -920,7 +920,7 @@ public class Camera2BasicFragment extends Fragment
             }
             */
 
-            case R.id.close: {
+            case com.futonchild.android.thesituation.R.id.close: {
                 Activity activity = getActivity();
                 if (null != activity) {
                     /*
@@ -1042,7 +1042,7 @@ public class Camera2BasicFragment extends Fragment
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Fragment parent = getParentFragment();
             return new AlertDialog.Builder(getActivity())
-                    .setMessage(R.string.request_permission)
+                    .setMessage(com.futonchild.android.thesituation.R.string.request_permission)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
