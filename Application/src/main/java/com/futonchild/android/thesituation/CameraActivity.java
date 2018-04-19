@@ -40,16 +40,11 @@ public class CameraActivity extends Activity {
                     .commit();
 
         }
-        Log.d("XXX", "a");
         // Hello World
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
-        Log.d("XXX", "b");
         mAdView = (AdView) findViewById(com.futonchild.android.thesituation.R.id.advert);
-        Log.d("XXX", "c");
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        Log.d("XXX", "d");
         mAdView.loadAd(adRequest);
-        Log.d("XXX", "e");
         mAdView.setAdListener(new AdListener() {
             public void onAdLoaded() {
                 Log.i("Ads","onAdLoaded");
