@@ -41,7 +41,7 @@ public class CameraActivity extends Activity {
 
         }
         // Hello World
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(this, "ca-app-pub-3317346400754777~1670085459");
         mAdView = (AdView) findViewById(com.futonchild.android.thesituation.R.id.advert);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         mAdView.loadAd(adRequest);
