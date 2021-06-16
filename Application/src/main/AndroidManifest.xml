@@ -3,7 +3,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.futonchild.android.thesituation"
     android:versionCode="3"
-    android:versionName="1.0.0" >
+    android:versionName="1.0.0">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,13 +12,15 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <application android:allowBackup="true"
+    <application
+        android:allowBackup="true"
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher_nose"
         android:theme="@style/MaterialTheme">
 
-        <activity android:name=".CameraActivity"
-                  android:label="@string/app_name"
+        <activity
+            android:name=".CameraActivity"
+            android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
